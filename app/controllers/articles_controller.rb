@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+   
    # 2.times { @article.stations.build }
   end
 
@@ -21,17 +22,16 @@ class ArticlesController < ApplicationController
   def edit
   #  @article.station = Station.new if @article.station.blank?
   # @article.build_station
-    1.times { @article.stations.build }
+   1.times { @article.stations.build }
   end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to @article, notice: '作成しました' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -43,15 +43,18 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
+    # respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
+
+        # format.html { redirect_to @article, notice: '更新しました' }
+        redirect_to articles_path, notice: '更新しました'
+        # format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        # format.html { render :edit }
+        render :edit
+        # format.json { render json: @article.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # DELETE /articles/1
@@ -59,7 +62,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to articles_url, notice: '削除しました' }
       format.json { head :no_content }
     end
   end
@@ -78,7 +81,12 @@ class ArticlesController < ApplicationController
         :address,
         :age,
         :remark,
-        stations_attributes: [:route_name, :station_name, :walk_time]    
-        )
+        stations_attributes: [
+          :id, 
+          :route_name, 
+          :station_name, 
+          :walk_time
+        ]    
+      )
     end
 end

@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      article: "物件"
+      station: "駅"
+    attributes:
+      article:
+        Create Article: "登録する"
+        Update Article: "更新する"
